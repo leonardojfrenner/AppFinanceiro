@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categorias">
+        <item>Moradia</item>
+        <item>Alimentação</item>
+        <item>Transporte</item>
+        <item>Saúde</item>
+        <item>Educação</item>
+        <item>Lazer</item>
+        <item>Outros</item>
+    </string-array>
+</resources>

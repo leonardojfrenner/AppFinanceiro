@@ -1,5 +1,7 @@
 package br.fatec.appfinanceiro.model
 
+import java.util.Date
+
 class ContaImpl {
     private val _contas = mutableListOf<Conta>()
 
@@ -27,9 +29,9 @@ class ContaImpl {
     }
 
     fun listarContasVencidas(): List<Conta> {
-        val hoje = System.currentTimeMillis()
+        val hoje = Date()
         return _contas.filter {
-            it.status == StatusConta.PENDENTE && it.dataVencimento < hoje
+            it.status == StatusConta.PENDENTE && it.dataVencimento.before(hoje)
         }
     }
 
@@ -42,7 +44,7 @@ class ContaImpl {
         conta?.let {
             val contaAtualizada = it.copy(
                 status = StatusConta.PAGO,
-                dataPagamento = System.currentTimeMillis()
+                dataPagamento = Date()
             )
             atualizarConta(contaAtualizada)
         }
