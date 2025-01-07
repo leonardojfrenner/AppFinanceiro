@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="br.fatec.appfinanceiro.view.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_add"
+        android:name="br.fatec.appfinanceiro.view.AddContaFragment"
+        android:label="Nova Conta"
+        tools:layout="@layout/fragment_add_conta" />
+
+    <fragment
+        android:id="@+id/navigation_historico"
+        android:name="br.fatec.appfinanceiro.view.HistoricoFragment"
+        android:label="Histórico"
+        tools:layout="@layout/fragment_historico" />
+
+    <fragment
+        android:id="@+id/navigation_relatorio"
+        android:name="br.fatec.appfinanceiro.view.RelatorioFragment"
+        android:label="Relatório"
+        tools:layout="@layout/fragment_relatorio" />
+
+</navigation>

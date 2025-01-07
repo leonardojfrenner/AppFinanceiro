@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores principais do tema -->
+    <color name="primary">#2196F3</color>          <!-- Azul mais moderno -->
+    <color name="primary_dark">#1976D2</color>     <!-- Azul escuro para status bar -->
+    <color name="primary_light">#64B5F6</color>    <!-- Azul claro para elementos secundários -->
+    <color name="accent">#00C853</color>           <!-- Verde vibrante para ações -->
+
+    <!-- Cores de status financeiro -->
+    <color name="positive_green">#00C853</color>   <!-- Verde para valores positivos -->
+    <color name="negative_red">#FF5252</color>     <!-- Vermelho para valores negativos -->
+    <color name="warning_yellow">#FFB300</color>   <!-- Amarelo para alertas -->
+
+    <!-- Cores de fundo e superfície -->
+    <color name="background">#F5F5F5</color>       <!-- Cinza bem claro para fundo -->
+    <color name="surface">#FFFFFF</color>          <!-- Branco para cards e superfícies -->
+    <color name="card_background">#FFFFFF</color>  <!-- Branco para cards -->
+    <color name="divider">#1F000000</color>       <!-- Divisor com 12% de opacidade -->
+
+    <!-- Cores de texto -->
+    <color name="on_surface">#212121</color>       <!-- Quase preto para texto principal -->
+    <color name="text_primary">#212121</color>     <!-- Texto principal -->
+    <color name="text_secondary">#757575</color>   <!-- Texto secundário -->
+    <color name="text_disabled">#9E9E9E</color>    <!-- Texto desabilitado -->
+
+    <!-- Cores base -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Cores de status -->
+    <color name="status_pending">#FFB300</color>   <!-- Amarelo para pendente -->
+    <color name="status_paid">#00C853</color>      <!-- Verde para pago -->
+    <color name="status_late">#FF5252</color>      <!-- Vermelho para atrasado -->
+</resources>
