@@ -3,9 +3,13 @@ package br.fatec.appfinanceiro.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import br.fatec.appfinanceiro.dao.ContaDaoImpl
 import br.fatec.appfinanceiro.model.Conta
 import br.fatec.appfinanceiro.model.ContaImpl
+import br.fatec.appfinanceiro.model.StatusConta
 import java.util.Date
+import kotlinx.coroutines.launch
 
 class ContasViewModel : ViewModel() {
     private val contaImpl = ContaImpl()
@@ -36,8 +40,15 @@ class ContasViewModel : ViewModel() {
         atualizarContas()
     }
 
-    fun marcarComoPaga(conta: Conta) {
-        contaImpl.marcarComoPaga(conta.id)
-        atualizarContas()
+    fun marcarComoPaga(conta: Conta, dataPagamento: Date) {
+        val contaDao = ContaDaoImpl()
+        viewModelScope.launch {
+            val contaAtualizada = conta.copy(
+                status = StatusConta.PAGO,
+                dataPagamento = dataPagamento
+            )
+            contaDao.atualizarConta(contaAtualizada)
+            atualizarContas()
+        }
     }
 }

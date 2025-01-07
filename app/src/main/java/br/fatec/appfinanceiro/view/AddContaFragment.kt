@@ -48,10 +48,15 @@ class AddContaFragment : Fragment() {
         val categorias = resources.getStringArray(R.array.categorias)
         val adapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
+            R.layout.item_dropdown_categoria,
             categorias
         )
-        binding.spinnerCategoria.setAdapter(adapter)
+
+        binding.spinnerCategoria.apply {
+            setAdapter(adapter)
+            threshold = 1
+            setText("", false)
+        }
     }
 
     private fun setupDatePicker() {

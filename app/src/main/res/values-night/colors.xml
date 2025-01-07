@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores de fundo e superfície (versão escura) -->
+    <color name="background_dark">#121212</color>
+    <color name="surface_dark">#1E1E1E</color>
+    <color name="card_background_dark">#2D2D2D</color>
+
+    <!-- Cores de texto (versão escura) -->
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary_dark">#B3FFFFFF</color>
+    <color name="text_disabled_dark">#66FFFFFF</color>
+
+    <!-- Cores de destaque (mais claras para melhor visibilidade) -->
+    <color name="primary_light">#64B5F6</color>
+</resources> 

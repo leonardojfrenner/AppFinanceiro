@@ -1,5 +1,6 @@
 package br.fatec.appfinanceiro.view
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.fatec.appfinanceiro.R
 import br.fatec.appfinanceiro.adapter.ContasAdapter
 import br.fatec.appfinanceiro.databinding.FragmentHomeBinding
+import br.fatec.appfinanceiro.databinding.DialogDetalhesContaBinding
 import br.fatec.appfinanceiro.model.Conta
 import br.fatec.appfinanceiro.util.DateUtils
-import br.fatec.appfinanceiro.util.DateUtils.formatarData
 import br.fatec.appfinanceiro.viewmodel.ContasViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.util.*
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -83,19 +85,46 @@ class HomeFragment : Fragment() {
     }
 
     private fun mostrarDialogDetalhes(conta: Conta) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(conta.nome)
-            .setMessage(
-                """
-                Valor: R$ ${String.format("%.2f", conta.valor)}
-                Vencimento: ${DateUtils.formatarData(conta.dataVencimento)}
-                Categoria: ${conta.categoria}
-                Status: ${conta.status.descricao}
-                ${conta.observacoes?.let { "\nObservações: $it" } ?: ""}
-                """.trimIndent()
-            )
+        val dialogBinding = DialogDetalhesContaBinding.inflate(layoutInflater)
+        var dataPagamentoSelecionada: Date? = null
+
+        dialogBinding.apply {
+            tvNomeConta.text = conta.nome
+            tvValor.text = "R$ ${String.format("%.2f", conta.valor)}"
+            tvDataVencimento.text = "Vencimento: ${DateUtils.formatarData(conta.dataVencimento)}"
+            tvCategoria.text = "Categoria: ${conta.categoria}"
+            tvStatus.text = "Status: ${conta.status.descricao}"
+            conta.observacoes?.let {
+                tvObservacoes.text = "Observações: $it"
+                tvObservacoes.visibility = View.VISIBLE
+            }
+
+            // Configurar campo de data
+            edtDataPagamento.apply {
+                setText(DateUtils.formatarData(Date()))
+                setOnClickListener {
+                    val calendar = Calendar.getInstance()
+                    DatePickerDialog(
+                        requireContext(),
+                        R.style.MaterialCalendarTheme,
+                        { _, year, month, day ->
+                            calendar.set(year, month, day)
+                            dataPagamentoSelecionada = calendar.time
+                            setText(DateUtils.formatarData(calendar.time))
+                        },
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)
+                    ).show()
+                }
+            }
+        }
+
+        MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialog_Rounded)
+            .setTitle("Detalhes da Conta")
+            .setView(dialogBinding.root)
             .setPositiveButton("Marcar como Paga") { _, _ ->
-                viewModel.marcarComoPaga(conta)
+                viewModel.marcarComoPaga(conta, dataPagamentoSelecionada ?: Date())
             }
             .setNegativeButton("Fechar", null)
             .show()
